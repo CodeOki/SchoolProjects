@@ -1,3 +1,2 @@
 # School Projects
-School Assignments coded mainly in Java
-Feel free to use my code!
+Some assignments that I've worked on during college years, mainly coded in Java.
