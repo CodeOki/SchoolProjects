@@ -1,0 +1,8 @@
+T   Kathy       Hull        38  green   
+T   Ellouise    Miles       26  grey    
+C   Aminah      Mccaffrey   55  black   4
+C   Kendra      Avery       40  silver  5
+C   Halle       Howells     80  white   4
+T   Ayaan       Harding     45  white
+C   Azra        Webster     30  red     6
+T   Kristy      Snow        60  yellow
