@@ -1,0 +1,188 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]: postgres
+Password for user postgres:
+psql (15.0)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# \dt
+Did not find any relations.
+postgres=#
+postgres=# CREATE DATABASE fall22E;
+CREATE DATABASE
+postgres=# \l
+                                                                List of database
+s
+   Name    |  Owner   | Encoding |          Collate           |           Ctype
+           | ICU Locale | Locale Provider |   Access privileges
+-----------+----------+----------+----------------------------+-----------------
+-----------+------------+-----------------+-----------------------
+ fall22e   | postgres | UTF8     | English_United States.1252 | English_United S
+tates.1252 |            | libc            |
+ postgres  | postgres | UTF8     | English_United States.1252 | English_United S
+tates.1252 |            | libc            |
+ template0 | postgres | UTF8     | English_United States.1252 | English_United S
+tates.1252 |            | libc            | =c/postgres          +
+           |          |          |                            |
+           |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | English_United States.1252 | English_United S
+tates.1252 |            | libc            | =c/postgres          +
+           |          |          |                            |
+           |            |                 | postgres=CTc/postgres
+(4 rows)
+
+
+postgres=# \c fall22e
+You are now connected to database "fall22e" as user "postgres".
+fall22e=# CREATE TABLE class(id INT,name VARCHAR(30));
+CREATE TABLE
+fall22e=# \dt
+         List of relations
+ Schema | Name  | Type  |  Owner
+--------+-------+-------+----------
+ public | class | table | postgres
+(1 row)
+
+
+fall22e=# SELECT * FROM class;
+ id | name
+----+------
+(0 rows)
+
+
+fall22e=# INSERT INTO class(id,name) VALUES(1,'George');
+INSERT 0 1
+fall22e=# SELECT * FROM class;
+ id |  name
+----+--------
+  1 | George
+(1 row)
+
+
+fall22e=# INSERT INTO class(id,name) VALUE(2,'Susan');
+ERROR:  syntax error at or near "VALUE"
+LINE 1: INSERT INTO class(id,name) VALUE(2,'Susan');
+                                   ^
+fall22e=# INSERT INTO class VALUE(2,'Susan');
+ERROR:  syntax error at or near "VALUE"
+LINE 1: INSERT INTO class VALUE(2,'Susan');
+                          ^
+fall22e=# INSERT INTO class VALUES(2,'Susan');
+INSERT 0 1
+fall22e=# INSERT INTO class VALUES(3,'Kelsey');
+INSERT 0 1
+fall22e=# SELECT * FROM class;
+ id |  name
+----+--------
+  1 | George
+  2 | Susan
+  3 | Kelsey
+(3 rows)
+
+
+fall22e=# SELECT name,id,name,name FROM class;
+  name  | id |  name  |  name
+--------+----+--------+--------
+ George |  1 | George | George
+ Susan  |  2 | Susan  | Susan
+ Kelsey |  3 | Kelsey | Kelsey
+(3 rows)
+
+
+fall22e=# SELECT id AS number FROM class;
+ number
+--------
+      1
+      2
+      3
+(3 rows)
+
+
+fall22e=# SELECT column_name FROM information_schema.columns WHERE TABLE_NAME='c
+lass';
+ column_name
+-------------
+ id
+ name
+(2 rows)
+
+
+fall22e=# SELECT id, id*2 FROM class;
+ id | ?column?
+----+----------
+  1 |        2
+  2 |        4
+  3 |        6
+(3 rows)
+
+
+fall22e=# SELECT id, id^3 AS "id cube" FROM class;
+ id | id cube
+----+---------
+  1 |       1
+  2 |       8
+  3 |      27
+(3 rows)
+
+
+fall22e=# INSERT INTO class VALUES(4, 'George');
+INSERT 0 1
+fall22e=# INSERT INTO class VALUES(5, 'Susan');
+INSERT 0 1
+fall22e=# INSERT INTO class VALUES(1, 'Mike');
+INSERT 0 1
+fall22e=# SELECT * FROM class;
+ id |  name
+----+--------
+  1 | George
+  2 | Susan
+  3 | Kelsey
+  4 | George
+  5 | Susan
+  1 | Mike
+(6 rows)
+
+
+fall22e=# SELECT DISTINCT name FROM class;
+  name
+--------
+ Susan
+ Mike
+ George
+ Kelsey
+(4 rows)
+
+
+fall22e=# SELECT current_date;
+ current_date
+--------------
+ 2022-11-03
+(1 row)
+
+
+fall22e=# SELECT current_time;
+    current_time
+--------------------
+ 19:09:53.910679-04
+(1 row)
+
+
+fall22e=# VALUES(current_date);
+  column1
+------------
+ 2022-11-03
+(1 row)
+
+
+fall22e=# VALUES(current_time);
+      column1
+--------------------
+ 19:10:30.187177-04
+(1 row)
+
+
+fall22e=#
